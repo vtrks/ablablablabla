@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horário Atual</title>
+    <style>
+        body {
+            background-color: #FFC0CB; /* Rosa claro */
+            font-family: Arial, sans-serif; /* Pode trocar pela fonte que preferir */
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        #time {
+            font-size: 2em;
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Horário:</h1>
+    <div id="time">{{ current_time }}</div>
+
+    <script>
+        setInterval(() => {
+            fetch('/').then(response => response.text()).then(html => {
+                document.getElementById('time').innerHTML = new DOMParser()
+                    .parseFromString(html, 'text/html')
+                    .querySelector('#time').innerHTML;
+            });
+        }, 1000); // Atualiza a cada 1 segundo
+    </script>
+</body>
+</html>
