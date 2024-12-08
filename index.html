@@ -23,16 +23,22 @@
 </head>
 <body>
     <h1>Horário:</h1>
-    <div id="time">16:22:14</div>
+    <div id="time"></div>
 
     <script>
-        setInterval(() => {
-            fetch('/').then(response => response.text()).then(html => {
-                document.getElementById('time').innerHTML = new DOMParser()
-                    .parseFromString(html, 'text/html')
-                    .querySelector('#time').innerHTML;
-            });
-        }, 1000); // Atualiza a cada 1 segundo
+        function updateTime() {
+            const now = new Date(); // Obtém o horário atual
+            const hours = String(now.getHours()).padStart(2, '0'); // Horas com 2 dígitos
+            const minutes = String(now.getMinutes()).padStart(2, '0'); // Minutos com 2 dígitos
+            const seconds = String(now.getSeconds()).padStart(2, '0'); // Segundos com 2 dígitos
+            document.getElementById('time').innerText = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Atualiza o horário a cada 1 segundo
+        setInterval(updateTime, 1000);
+
+        // Chama a função imediatamente para exibir o horário ao carregar a página
+        updateTime();
     </script>
 </body>
 </html>
